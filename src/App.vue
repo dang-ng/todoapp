@@ -13,9 +13,9 @@ const todos_asc = computed(() =>
   })
 );
 
-const removeTodo = todo => {
-  todos.value = todos.value.filter(t => t !== todo)
-}
+const removeTodo = (todo) => {
+  todos.value = todos.value.filter((t) => t !== todo);
+};
 
 watch(
   todos,
@@ -46,30 +46,31 @@ const addTodo = () => {
     createdAt: new Date().getTime(),
   });
 
-  input_content.value = ''
-  input_category.value = null
+  input_content.value = "";
+  input_category.value = null;
 };
+
 </script>
 
 <template>
   <main class="app">
     <section class="greeting">
       <h2 class="title">
-        What's up, <input type="text" placeholder="name here" v-model="name" />
+        Chào buổi sáng, <input type="text" placeholder="name here" v-model="name" />
       </h2>
     </section>
 
     <section class="create-todo">
-      <h3>CREATE A TODO</h3>
+      <h3>HÔM NAY BẠN CẦN LƯU VIỆC GÌ</h3>
       <form @submit.prevent="addTodo">
-        <h4>What's on your todo list?</h4>
+        <h4>Việc cần làm:</h4>
         <input
           type="text"
-          placeholder="e.g. make a video"
+          placeholder="thêm vào 1 việc gì đó đi"
           v-model="input_content"
         />
 
-        <h4>Pick a category</h4>
+        <h4>Chọn danh mục</h4>
 
         <div class="options">
           <label>
@@ -80,7 +81,7 @@ const addTodo = () => {
               v-model="input_category"
             />
             <span class="bubble business"></span>
-            <div>Business</div>
+            <div>Công việc</div>
           </label>
           <label>
             <input
@@ -90,27 +91,30 @@ const addTodo = () => {
               v-model="input_category"
             />
             <span class="bubble personal"></span>
-            <div>Personal</div>
+            <div>Cá nhân</div>
           </label>
 
-          <input type="submit" value="Add todo" />
         </div>
+        <input type="submit" value="Thêm vào danh sách" />
       </form>
     </section>
     <section class="todo-list">
-      <h3>TODO LIST</h3>
+      <h3>DANH SÁCH</h3>
       <div class="list">
-        <div v-for='todo in todos_asc' :class="`todo-item ${todo.done && 'done'}` ">
+        <div
+          v-for="todo in todos_asc"
+          :class="`todo-item ${todo.done && 'done'}`"
+        >
           <label>
-            <input type="checkbox" v-model="todo.done">
+            <input type="checkbox" v-model="todo.done" />
             <span :class="`bubble ${todo.category}`"></span>
           </label>
           <div class="todo-content">
-            <input type="text" v-model="todo.content"/>
+            <input type="text" v-model="todo.content" />
           </div>
 
           <div class="actions">
-            <button class="delete" @click="removeTodo(todo)">Delete</button>
+            <button class="delete" @click="removeTodo(todo)">Xóa</button>
           </div>
         </div>
       </div>
